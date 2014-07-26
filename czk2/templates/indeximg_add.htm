@@ -1,0 +1,54 @@
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,datepicker/WdatePicker.js,calendar.js"}
+<form action="indeximg.php" method="post" enctype="multipart/form-data">
+<div class="main-div">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">图片地址</td>
+    <td><input type="file" name="img_file_src" value="" id="some_name" size="40" />
+    <br />{if $rt.img_src}<input name="img_src" type="text" value="{$rt.img_src}" size="40" />{/if}
+    
+    </td>
+  </tr>
+  <tr>
+    <td class="label">图片链接</td>
+    <td><input name="img_url" type="text" value="{if $smarty.get.ad_link}{$smarty.get.ad_link}{else}{$rt.img_url}{/if}" size="40" /></td>
+  </tr>
+  <tr>
+    <td class="label">图片描述</td>
+    <td><input name="img_text" type="text" value="{$rt.img_txt}" size="40" /></td>
+  </tr>
+  <tr>
+    <td class="label">图片排序</td>
+    <td><input name="img_sort" type="text" value="{$rt.img_sort}" size="4" maxlength="3"/></td>
+  </tr>
+   <tr>
+    <td class="label">发布时间</td>
+    <td><input name="sdate" type="text" value="{$rt.sdate}" size="21" maxlength="21" onfocus="WdatePicker({minDate:'%y-%M-{%d}',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+  </tr>
+   <tr>
+    <td class="label">结束时间</td>
+    <td><input name="edate" type="text" value="{$rt.edate}" size="21" maxlength="21" onfocus="WdatePicker({minDate:'%y-%M-{%d}',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+  </tr>
+  <tr align="center">
+    <td colspan="2">
+      <input type="hidden"  name="id"       value="{$rt.id}" />
+      <input type="hidden"  name="step"       value="2" />
+      <input type="hidden"  name="act"       value="{$rt.act}" />
+      <input type="submit" class="button" name="Submit"       value="确定" />
+      <input type="reset" class="button"  name="Reset"        value="重置" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+//-->
+</script>
+{include file="pagefooter.htm"}

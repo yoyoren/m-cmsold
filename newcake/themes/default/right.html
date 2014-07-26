@@ -1,0 +1,106 @@
+ <!--right start-->
+  <div class="AreaR">
+    <!--searchblank start-->
+  	<div class="searchblank">
+    	<!--searchblankTit start-->
+        <div class="searchblankTit">
+          <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+	function kuang(id){
+		  labels = document.getElementById(id).getElementsByTagName('span');
+		  radios = document.getElementById(id).getElementsByTagName('input');
+		  for(i=0,j=labels.length ; i<j ; i++)
+		  {
+		   labels[i].onclick=function() 
+		   {   
+		  
+			if(this.className == '') {
+			 for(k=0,l=labels.length ; k<l ; k++)
+			 {
+			  labels[k].className='';
+			  radios[k].checked = false;
+			 }
+			 this.className='checked';
+			 try{
+				document.getElementById(this.getAttribute('name')).checked = true;
+			 } catch (e) {}
+			}
+		   }
+		  }
+	}
+	 
+    -->
+    {/literal}
+    </script>
+  		<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" style="margin-top:0px;">
+		  <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}"  class="keywords"/>
+		   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;"  />		   
+		</form>
+        </div>
+  		<!--searchblankTit end-->
+  		<!--searchblankList start-->
+        <div class="searchblankList">
+            <div class="searchcontent" id="jieri" onclick="kuang('jieri')">
+<input type="radio" id="shengri" name="jieri" value="male" class="hide1"/><span name="shengri" >&nbsp;</span>
+<input type="radio" id="juhui" name="jieri" value="female" class="hide1"/><span name="juhui" f>&nbsp;</span>
+<input type="radio" id="ganen" name="jieri" value="nomale" class="hide1"/><span name="ganen" >&nbsp;</span>
+<input type="radio" id="qingzhu" name="jieri" value="nomale" class="hide1" /><span name="qingzhu" >&nbsp;</span><br>
+<input type="radio" id="huodong" name="jieri" value="nomale" class="hide1" /><span name="huodong" >&nbsp;</span>
+<input type="radio" id="shangwu" name="jieri" value="nomale" class="hide1" /><span name="shangwu" >&nbsp;</span>
+<input type="radio" id="kuanghuan" name="jieri" value="nomale" class="hide1" /><span name="kuanghuan" >&nbsp;</span>
+<input type="radio" id="jieriall" name="jieri" value="nomale" class="hide1"  checked="checked"/><span name="jieriall" class="checked">&nbsp;</span>
+
+            </div>      
+            <div style="height:8px"></div>
+            <div class="searchcontent " id="kouwei" onclick="kuang('kouwei')">
+<div style="width:63px"><input type="radio" id="qiaokeli" name="kouwei" value="male" class="hide1"/><span name="qiaokeli" >&nbsp;</span></div>
+<div style="width:80px"><input type="radio" id="naiyou" name="kouwei" value="female" class="hide1"/><span name="naiyou" >&nbsp;</span></div>
+<div style="width:63px"><input type="radio" id="musi" name="kouwei" value="nomale" class="hide1"/><span name="musi" >&nbsp;</span></div>
+<div style="width:80px"><input type="radio" id="zhishi" name="kouwei" value="nomale" class="hide1" /><span name="zhishi" >&nbsp;</span></div>
+<div style="width:63px"><input type="radio" id="ice" name="kouwei" value="nomale" class="hide1" /><span name="ice" >&nbsp;</span></div>
+<div style="width:80px"><input type="radio" id="wutang" name="kouwei" value="nomale" class="hide1" /><span name="wutang" >&nbsp;</span></div>
+<div style="width:63px"><input type="radio" id="kouweiall" name="kouwei" value="nomale" class="hide1"  checked="checked"/><span name="kouweiall" class="checked">&nbsp;</span></div>           
+            </div>      
+            <div style="clear:both"></div>
+            <div class="searchcontent "><div style="float:left;width:50px">&nbsp;</div><input type="text" style="width:30px"></div>
+             <div class="searchcontent " id="han"  onclick="kuang('han')">
+<div ><input type="radio" id="jianguo" name="han" value="jianguo" class="hide1"/><span name="jianguo" >&nbsp;</span></div>
+<div ><input type="radio" id="jiu" name="han" value="jiu" class="hide1"/><span name="jiu" >&nbsp;</span></div>
+<div ><input type="radio" id="hanall" name="han" value="hanall" class="hide1" checked="checked"/><span name="hanall" >&nbsp;</span></div>
+
+			 </div>
+            <div class="blank5"></div>
+           
+        </div>
+        <!--searchblankList end-->  
+  	</div>
+    <!--searchblank end-->
+     <div id="myinfo">
+	
+		
+    </div>
+	<!--myinfo end-->
+   
+     <!--myorder-->
+	<div id="myorder" >
+	 
+   
+   
+	</div> 
+    
+    
+  </div>
+  <!--right end-->

@@ -1,0 +1,51 @@
+{include file="pageheader.htm"}
+<div class="tab-div">
+<div class="tab-body">
+  <div class="list-div list-div-ad" id="listDiv">
+	  <table cellspacing='1' cellpadding='3' id='list-table' width="70%">
+		  <tr>
+		    <th width="30%">商品名称</th>
+		    <th width="40%">推荐次序</th>
+		    <th>操作</th>
+		  </tr>
+		  {foreach from =$goods key=k item=val}
+		  <tr>
+		    <td align="center">{$val.goods_name_style}</td>
+		    <td align="center"><span style="cursor:pointer;" id="{$val.goods_id}" onclick="edit({$val.goods_id})">{$val.sort}</span></td>
+		    <td align="center"><a href="#" onclick="delete_({$val.goods_id})">删除</a></td>
+		  </tr>
+		  {/foreach}
+	  </table>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+function edit(goods_id)
+{
+	var goods=document.getElementById(goods_id);
+	var text=goods.innerHTML;
+	var td=goods.parentNode;	
+	td.innerHTML="<input type='text' id='"+goods_id+"' value='"+text+"' size='5'/><span style='cursor:pointer;' onclick='update("+goods_id+","+text+")'>确定</span>";
+		
+}
+function update(goods_id,text)
+{
+	var goods=document.getElementById(goods_id);	
+	var val=goods.value;
+	var td=goods.parentNode;
+	if(isNaN(val)){alert("请输入数字");return;}
+	td.innerHTML="<span style='cursor:pointer;' id='"+goods_id+"' onclick='edit("+goods_id+")'>"+val+"</span>";
+	
+	if(text!=val)
+	{
+		Ajax.call( 'goods_recommend.php?act=update','goods_id='+goods_id+'&order_id='+val , callback, 'GET', 'TEXT');
+	}
+}
+function callback(result){
+}
+function delete_(goods_id){if(confirm("是否删除"))Ajax.call( 'goods_recommend.php?act=delete','goods_id='+goods_id , callback1, 'GET', 'TEXT');}
+function callback1(result){
+	if(result){location.href='goods_recommend.php?act=list';}
+}
+</script>
+{include file="pagefooter.htm"}

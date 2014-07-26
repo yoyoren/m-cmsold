@@ -1,0 +1,46 @@
+{include file="pageheader.htm"}
+<div class="tab-div">
+  <!-- tab bar -->
+  
+  <!-- body -->
+  <div class="tab-body">
+  <div class="list-div list-div-ad" id="listDiv">
+  <table cellspacing='1' cellpadding='3' id='list-table' width="70%">
+    <tr>
+      <th>平台</th>
+      <th>版本号</th>
+      <th>上传时间</th>
+      <th>用户名</th>
+    </tr>
+    {foreach from=$list item=val}
+    <tr>
+      <td align="center">{if $val.app eq 'i'}iPhone{elseif $val.app eq 'a'}Android{/if}</td>
+      <td align="center">V{$val.version}</td>
+      <td align="center">{$val.edittime}</td>
+      <td align="center">{$val.admin}</td>
+      
+    </tr>
+    {/foreach}
+  </table>
+
+  </div>
+
+  </div>
+
+</div>
+<script language="JavaScript">
+function check_del()
+{
+  if (confirm('是否删除'))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+</script>
+
+{include file="pagefooter.htm"}

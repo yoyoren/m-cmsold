@@ -1,0 +1,38 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="box history" id='history_div'>
+  <div class="history_title"></div>
+  <div id='history_list'>    
+    <ul>
+        	{foreach name=history_goods from=$history_goods item=goods}
+            <li>
+            <span>{$smarty.foreach.history_goods.iteration}</span>
+            <img src="{$goods.goods_thumb}" width="40" height="30" />
+            <img src="themes/default/images/price_name.gif" width="24" height="24" />
+            <div>
+            <p style="color:#000;">{$goods.goods_price|price_format_new}</p>
+			<p>{$goods.goods_name}</p>
+            </div>
+            </li>
+            {/foreach}
+            
+        </ul>    
+  </div>
+</div>
+<script type="text/javascript">
+if (document.getElementById('history_list').innerHTML.replace(/\s/g,'').length<1)
+{
+    document.getElementById('history_div').style.display='none';
+}
+else
+{
+    document.getElementById('history_div').style.display='block';
+}
+function clear_history()
+{
+Ajax.call('user.php', 'act=clear_history',clear_history_Response, 'GET', 'TEXT',1,1);
+}
+function clear_history_Response(res)
+{
+document.getElementById('history_list').innerHTML = '{$lang.no_history}';
+}
+</script>

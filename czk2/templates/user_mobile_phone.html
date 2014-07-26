@@ -1,0 +1,17 @@
+<!-- $Id: eachday_count.htm  2013-11-30 02:27:21Z testxufengli $ -->
+{if $full_page}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{include file="pageheader.htm"}
+<h1>管理员：{$admin_name}</h1>
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- start user_bonus list -->
+<div class="list-div" id="listDiv">
+{/if}
+<div style="text-align:center; font-size:16px;height:60px;line-height:60px;">
+请点击右上角【会员电话导出】导出会员电话<font size="+5">&nbsp;&nbsp;:)</font>
+{if $full_page}
+</div>
+</div>
+{include file="pagefooter.htm"}
+{/if}

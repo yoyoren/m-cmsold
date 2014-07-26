@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table width="800" border="1" cellpadding="5" cellspacing="0"  align="center" id="table">
+  <tr>
+    <td>编号</td>
+    <td>商品名称</td>
+    <td>城市</td>
+    <td>是否上市</td>
+    <td>最后一次更新时间</td>
+  </tr>
+  {foreach from =$res key=k item=val}
+  <tr>
+    <td>{$k}</td>
+    <td>{$val.goods_name_style}</td>
+    <td>{if $val.city==441}北京{elseif $val.city==442}上海{elseif $val.city==443}天津{else}杭州{/if}</td>
+    <td>{if $val.is_listed==1}已上市{else}<font color="red">未上市</font>{/if}</td>
+    <td>{$val.last_update}</td>
+  </tr>
+  {/foreach}
+</body>
+</html>

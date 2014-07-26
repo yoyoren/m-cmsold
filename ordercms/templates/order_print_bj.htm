@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+*{margin: 0; padding: 0;}
+td {font-size:12px;}
+@media print {
+.noprint {display:none;}
+}
+
+
+</style>
+<style type="text/css">
+table{border-collapse:collapse;border-spacing:0;empty-cells:show;font-size:inherit}
+.con1{width: 13cm; background: #fff; height: 1.8cm; padding-top: 2.8cm; font-size: 12px;}
+td{background: #fff;}
+.con1 table{table-layout: fixed; width: 100%;}
+.con1 td{vertical-align: top;}
+.con1 .td1{width: 3cm; padding-left: 1.4cm;}
+.con1 .td2{width:3cm; padding-left: 1cm;}
+.con1 .td3{width:3.2cm; padding-left: 1.3cm;}
+
+.con2{width: 13cm; background: #fff; height: 3.8cm; font-size: 12px;}
+.con2 table{table-layout: fixed; width: 100%;}
+.con2 td{line-height: 0.9cm;}
+.con2 .td1{width:1.6cm; padding-left:1.1cm; height: 0.9cm;}
+.con2 .td2{width:2.4cm; padding-left:1.6cm; height: 0.9cm;}
+.con2 .td3{width:4.6cm; padding-left:1.6cm; height: 0.9cm;}
+.con2 .td4{width: 11cm; padding-left: 1.4cm; height: 0.9cm;}
+
+.con3{width: 13cm; background: #fff; height: 2.3cm; padding-top: 0.8cm; font-size: 12px; overflow: hidden;}
+.con3 table{table-layout: fixed; width: 100%;}
+.con3 td{height: 0.4cm; line-height: 0.4cm; overflow: visible; text-align: center; white-space:nowrap;}
+.con3 .td1{width:2.0cm;}
+.con3 .td2{width:1.6cm;}
+.con3 .td3{width:1.6cm;}
+.con3 .td4{width:1.6cm;}
+.con3 .td5{width:2.6cm;}
+.con3 .td6{width:1.6cm;}
+.con3 .td7{width:1.8cm;}
+
+.con4{width: 13cm; background: #fff; height: 2.3cm; padding-top: 0.8cm; font-size: 12px; overflow: hidden;}
+.con4 table{table-layout: fixed; width: 100%;}
+.con4 td{text-align: center; height: 1cm; line-height: 1cm;}
+.con4 .td1{width:1.6cm; padding-left: 2.0cm;}
+.con4 .td2{width:1.6cm;}
+.con4 .td3{width:4.2cm;}
+.con4 .td4{width:1.6cm;}
+.con4 .td5{width:1.8cm;}
+
+.con5{width: 13cm; background: #fff; height: 2.3cm; padding-top: 0.8cm; font-size: 12px;}
+.con5 table{table-layout: fixed; width: 100%;}
+.con5 td{text-align: center; height: 1.1cm; overflow: visible; vertical-align: middle;}
+.con5 .td1{width:2.3cm; padding-left:2.1cm;}
+.con5 .td2{width:1.7cm;}
+.con5 .td3{width:1.5cm;}
+.con5 .td4{width:1.7cm;}
+.con5 .td5{width:1.6cm;}
+.con5 .td6{width:1.8cm;}
+.con5 .td7,
+.con5 .td8,
+.con5 .td9{vertical-align: top; text-align: left;}
+.con5 .td7{width:3.2cm; padding-left:3cm;}
+.con5 .td8{width:2.1cm; padding-left:1cm;}
+.con5 .td9{width:2.1cm; padding-left:1.5cm;}
+
+.con6{width: 13cm; background: #fff; height: 1cm; padding-top: 0.8cm; font-size: 12px;}
+.con6 table{table-layout: fixed; width: 100%;}
+.con6 td{text-align: left; height: 1cm; overflow: visible; vertical-align: middle;}
+.con6 .td2{width: 2cm;}
+.con6 .td2{width: 3.5cm;}
+.con6 .td3{width: 3.5cm;}
+.con6 .td4{width: 3.7cm;}
+</style>
+</head>
+<body>
+<div style="border-right:1xp solid #000; padding:{$begin_padding}cm 0 0 0.7cm;">
+<div class="con1">
+  <table>
+    <tr>
+      <td class="td1"><b>{foreach from=$array item=pack}{$pack}{/foreach}</b></td>
+      <td class="td2">{$order.add_date}</td>
+      <td class="td3">{$order.order_sn}<br/><b>{$psn}-{$goods.cakenum}</b></td>
+    </tr>
+  </table>
+</div>
+<div class="con2">
+  <table>
+    <tr>
+      <td class="td1">{$order.orderman}</td>
+      <td class="td2">{$order.ordertel}</td>
+      <td class="td3">{$order.tel}</td>
+    </tr>
+    <tr>
+      <td class="td1">{$order.consignee}</td>
+      <td class="td2">{$order.mobile}&nbsp;{$order.tel}</td>
+      <td class="td3">{$order.btime}</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td class="td4">{$order.address}</td>
+    </tr>
+    <tr>
+      <td class="td4">{$order.money_address}</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 最多能放5个蛋糕 前两个表没有做溢出处理 -->
+<div class="con3">
+  <table>
+  {foreach from=$goods.goods item=goods}
+	 <tr>
+      <td class="td1">{$goods.goods_name}</td>
+      <td class="td2">{$goods.goods_attr}</td>
+      <td class="td3">{$goods.goods_number}</td>
+      <td class="td4">{if $goods.goods_sn =='D3'}套{else}个{/if}</td>
+      <td class="td5">{$goods.goods_price}</td>
+      <td class="td6">{$goods.goods_discount}</td>
+      <td class="td7">{$goods.goods_sub}</td>
+    </tr>
+    {/foreach}
+  </table>
+</div>
+<div class="con4">
+  <table>
+    <tr>
+      <td class="td1">{$goods.canju}</td>
+      <td class="td2">{$goods.canju_sum}</td>
+      <td class="td3">{$order.shipping_fee}</td>
+      <td class="td4">{$order.card_name}</td>
+      <td class="td5">{$order.card_message}</td>
+    </tr>
+    <tr>
+      <td class="td1">{$goods.candle}</td>
+      <td class="td2">{$goods.candle_sum}</td>
+      <td class="td3">{$order.shipping_fee}</td>
+      <td class="td4">{$order.card_name}</td>
+      <td class="td5">{$order.card_message}</td>
+    </tr>
+  </table>
+</div>
+<div class="con5">
+  <table>
+    <tr>
+      <td class="td1">{$order.goods_amount}</td>
+      <td class="td2">{$order.fj_fee}</td>
+      <td class="td3">{$order.fw_fee}</td>
+      <td class="td4">{$pay.paid}</td>
+      <td class="td5">{$pay[payname]}{if $pay[card_no]}({$pay[card_no]}){/if}</td>
+      <td class="td6">{$pay[unpaid]}</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td class="td7">{$order.inv_payee}</td>
+      <td class="td8">{$order.inv_content}</td>
+      <td class="td9">{$order.wsts}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="con6">
+  <table>
+    <tr>
+      <td class="td1">556</td>
+      <td class="td2">0</td>
+      <td class="td3">10</td>
+      <td class="td4">0</td>
+    </tr>
+  </table>
+</div>
+</div>
+</body>
+</html>

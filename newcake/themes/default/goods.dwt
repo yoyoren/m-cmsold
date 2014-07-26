@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,transport.js,utils.js'}
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+
+function pic()
+{
+	document.getElementById('bgimg').height=document.body.offsetHeight+40;
+
+}
+</script>
+</head>
+<body>
+<div id="div_bg" style="margin-top:20px;">
+<img src="images/bg.jpg"  id="bgimg" style="z-index:-1;position:absolute;left:0;top:0;width:100%;" >
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="blank20"></div>
+<div class="blank5"></div>
+<div class="cmain clearfix">
+  <!--right start-->
+  <div class="AreaL"> 
+   <!--商品详情start-->
+   <div id="goodsInfo" class="clearfix">
+     <!--商品图片和相册 start-->
+     <div class="imgInfo">
+     
+     </div>
+     <!--商品图片和相册 end-->
+	 <div class="buy"><a href="javascript:addToCart({$goods.goods_id})"><img src="images/cartbuy.png"></a></div>
+	 <div id="ECS_GOODS_AMOUNT"></div>
+     <div class="textInfo">
+     <form action="javascript:addToCart({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+      <ul  class="goodsattr" id="goodsattr">
+      <!-- {* 开始循环所有可选属性 *} -->
+      <!-- {foreach from=$specification item=spec key=spec_key} -->
+      <li>
+              <!-- {foreach from=$spec.values item=value key=key} -->
+              <label for="spec_value_{$value.id}">
+               <b>{$value.label}&nbsp;&nbsp;&nbsp;[{$value.format_price|abs}]</b> </label>
+              <input  type="radio" name="spec_{$spec_key}"  value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 1}checked{/if} onclick="changePrice()" /><!--<class="hide1">*-->
+			  <label1  id="_{$value.id}" ></label1>
+              <br />
+              <!-- {/foreach} -->
+              <input type="hidden" name="spec_list" value="{$key}" />                                 
+      </li>    
+      <!-- {/foreach} -->
+      <!-- {* 结束循环可选属性 *} -->
+      </ul>
+     </div>
+	 <div class="plus"></div>
+	 <div class="num">
+        <img src="images/minus.png" onclick="changenumber1(0)">&nbsp;<input name="number" type="text" id="number" value="1" size="2"   onchange="changePrice()" />&nbsp;<img src="images/plus.png" onclick="changenumber1(1)">
+     </div>
+	 <div class="minus"></div>  
+      </form>
+   </div>
+   <div class="blank660"></div>
+    <div class="more"><img src="images/more.png" /></div>
+   <div class="blank20"></div>
+   <div class="more1" onmouseover="showlanmeibg(50)"  onmouseout="showlanmei(50)">
+   <img src="images/50.jpg" id="50" usemap="#50Map" />
+   <map name="50Map" id="50Map">
+   <area shape="rect" coords="124,124,176,151" href="goods.php?id=33" />
+   <area shape="rect" coords="143,153,179,177" href="javascript:addToCart(33)" />  
+   </map>
+   </div>
+   <div class="more" onmouseover="showlanmeibg(51)"  onmouseout="showlanmei(51)"><img src="images/51.jpg" id="51" usemap="#51Map"/>
+   <map name="51Map" id="51Map">
+   <area shape="rect" coords="143,153,179,177" href="javascript:addToCart(34)" />
+   <area shape="rect" coords="124,124,176,151" href="goods.php?id=36" />
+   </map>
+   </div>
+   <div class="more" onmouseover="showlanmeibg(52)"  onmouseout="showlanmei(52)"><img src="images/52.jpg" border="0" usemap="#52Map" id="52" />
+	<map name="52Map" id="52Map">
+	<area shape="rect" coords="143,153,179,177" href="javascript:addToCart(35)" />
+	<area shape="rect" coords="124,124,176,151" href="goods.php?id=36" /></map></div>
+   <div class="more"  onmouseover="showlanmeibg(53)"  onmouseout="showlanmei(53)"><img src="images/53.jpg" id="53" usemap="#53Map"/>
+   <map name="53Map" id="53Map"><area shape="rect" coords="143,153,179,177" href="javascript:addToCart(36)" />
+   <area shape="rect" coords="124,124,176,151" href="goods.php?id=36" /></map></div>
+   
+   <div class="blank"></div>
+   <!--商品详情end-->
+  </div>
+  <!--right end-->
+  <!--right start-->
+  <div class="AreaR">
+    <!--searchblank start-->
+  	<div class="searchblank">
+      <!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+      <!-- #BeginLibraryItem "/library/search_form2.lbi" --><!-- #EndLibraryItem -->	
+  		  
+  	</div>
+    <!--searchblank end-->
+    {insert name='right_my_info'}
+    
+    {insert name='right_history'}
+    
+ 
+     <!--myorder-->
+	 {insert name='right_cart_info'}
+    
+    
+  </div>
+  <!--right end-->
+</div>
+<div class="blank5"></div>
+<div class="blank5"></div>
+
+<div class="blank5"></div>
+<div class="blank20"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</div>
+</body>
+<script type="text/javascript">
+var goods_id = <!--{$goods_id}-->;
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var gmt_end_time = {$promote_end_time|default:0};
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var goodsId = {$goods_id};
+var now_time = {$now_time};
+
+<!-- {literal} -->
+onload = function(){
+  changePrice();
+  //fixpng();
+  pic();
+  attrkuang();
+  try { onload_leftTime(); }
+  catch (e) {}
+}
+
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+function changenumber1(way)
+{
+	if(way=="0"){
+		 document.forms['ECS_FORMBUY'].elements['number'].value=parseInt(document.forms['ECS_FORMBUY'].elements['number'].value)-1;
+		 if(document.forms['ECS_FORMBUY'].elements['number'].value==0) document.forms['ECS_FORMBUY'].elements['number'].value==1;
+		 changePrice();	 
+	}else{
+	 	document.forms['ECS_FORMBUY'].elements['number'].value=parseInt(document.forms['ECS_FORMBUY'].elements['number'].value)+1;
+		changePrice();	
+	}
+}
+function showlanmei(id)
+{
+	document.getElementById(id).setAttribute("src","themes/default/images/"+id+".jpg");
+}
+function showlanmeibg(id)
+{
+	document.getElementById(id).setAttribute("src","themes/default/images/"+id+"bg.jpg");
+}
+function attrkuang(){
+		  labels = document.getElementById('goodsattr').getElementsByTagName('label');
+		  radios = document.getElementById('goodsattr').getElementsByTagName('input');
+		  for(m=0;m<radios.length;m++){
+		  	if(radios[m].checked == true) 
+			{
+				var aa=radios[m].id;
+				document.getElementById(aa.substr(10)).className='checked';;
+			}
+		  }
+		  for(i=0,j=labels.length ; i<j ; i++)
+		  {
+		   labels[i].onclick=function() 
+		   {   
+			if(this.className == '') {
+			 for(k=0,l=labels.length ; k<l ; k++)
+			 {
+			  labels[k].className='';
+			  radios[k].checked = false;
+			 }
+			 this.className='checked';
+			 var s=this.id;	 
+			 try{
+				document.getElementById('spec_value'+s).checked = true;
+				changePrice();
+			 } catch (e) {}
+			}
+		   }
+		  }
+	}
+<!-- {/literal} -->
+</script>
+</html>

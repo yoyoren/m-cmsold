@@ -1,0 +1,78 @@
+<!-- $Id: bonus_type.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+<h1>管理员：{$admin_name}</h1>
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="list-div">
+  <table cellpadding="3" cellspacing="1">
+    <tr><td>储值卡描述：</td><td>{$type.mc_name}</td>
+    	<td>导出数量：</td><td>{$type.sent_count}</td>
+    </tr>
+    <tr><td>起始编号：</td><td>{$type.mc_scardid}</td>
+    	<td>截止编号：</td><td>{$type.mc_ecardid}</td>
+    	<td></td><td></td>
+    </tr>
+    <tr><td>维护人：</td><td>{$type.mc_cname}</td>
+    	<td>维护日期：</td><td>{$type.mc_cdate}</td>
+    	<td></td><td></td>
+    </tr>
+
+    <tr><td>导出人：</td><td>{$admin_name}</td>
+    	<td>导出日期：</td><td>{$type.print_date}</td>
+    	<td></td><td></td>
+    </tr>
+  </table>  
+</div>
+
+<form method="post" action="moneycard1.php?act=gen_excelaction&tid={$type.mc_id}" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>编号</th>
+      <th>储值卡描述</th>
+      <th>面值金额</th>
+      <th>卡号</th>
+      <th>密码</th>
+      <th>使用起始日期</th>
+      <th>使用失效日期</th>
+      <th>状态</th>
+      <th>生效人</th>
+      <th>生效日期</th>
+      <th>使用会员</th>
+      <th>使用时间</th>
+    </tr>
+    {foreach from=$type_list item=val}
+    <tr> 
+      <td align="right">{$val.id}</td>     
+      <td align="right">{$type.mc_name}</td>
+      <td align="right">￥{$val.cardmoney}</td>
+      <td align="right">{$val.cardid}</td>      
+      <td align="right">{$val.cardpassword}</td>
+      <td align="right">{$val.sdate}</td>
+      <td align="right">{$val.edate}</td>
+      <td align="right">{if $val.flag eq 0}待生效{else if $val.flag eq 1}已生效{/if}</td>
+      <td align="right">{$val.aname}</td>
+      <td align="right">{$val.adate}</td>
+      <td align="right">{$val.user_name}</td>
+      <td align="right">{$val.used_time}</td>
+    </tr>
+      {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+      {/foreach}
+       
+    <tr><td><input type="submit" value="导出" name="a" id="a" class="button"/></td>
+    </tr>
+  </table>
+
+{if $full_page}
+</div>
+</form>
+
+<script type="text/javascript" language="JavaScript">
+
+</script>
+{include file="pagefooter.htm"}
+{/if}

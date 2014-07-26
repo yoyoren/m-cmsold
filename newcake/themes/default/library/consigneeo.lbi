@@ -1,0 +1,45 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="shipping1">
+{insert_scripts files='utils.js,transport.js,region.js'}
+<form id="form1" name="form1" method="post" action="" >
+  	<input name="consignee" type="text" class="name" id="shipping_consignee" value="{$consignee.consignee}" />
+    <a  href="#" onClick="update_consignee();" >保存/修改</a>
+	
+    <select name="city" id="shipping_city" class="city" onchange="region.changed(this, 3, 'shipping_province')">
+    <!-- {foreach from=$city_list item=city} -->
+        <option value="{$city.region_id}" {if $consignee.city eq $country.region_id}selected{/if}>{$city.region_name}</option>
+        <!-- {/foreach} -->
+    </select>
+    <select name="district" class="district" id="shipping_district">
+    <option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+    <!-- {foreach from=$district_list item=district} -->
+        <option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+        <!-- {/foreach} -->
+    </select>
+    <input type="text" name="address" class="address" id="shipping_address" value="{$consignee.address}" />
+    <a  href="#" onClick="update_consignee();" >保存/修改</a>
+  	<input name="tel" id="shipping_tel" type="text" class="telephone" value="{$consignee.tel}"/>
+  	<a  href="#" onClick="update_consignee();" >保存/修改</a>
+ 
+  <input name="address_id" type="hidden" value="{$consignee.address_id}" id="shipping_address_id" />
+   </form>
+</div>
+<script type="text/javascript">
+function update_consignee()
+{
+   var str = "is_ajax=1&address_id=" + document.getElementById("shipping_address_id").value;
+   str +="&consignee=" + document.getElementById("shipping_consignee").value;
+   str +="&city=" + document.getElementById("shipping_city").value; 
+   str +="&district=" + document.getElementById("shipping_district").value; 
+   str +="&address=" + document.getElementById("shipping_address").value; 
+   str +="&tel=" + document.getElementById("shipping_tel").value; 
+   Ajax.call('flow.php?step=consignee', str, update_consignee_Response, 'POST', 'JSON');
+}
+function update_consignee_Response(result)
+{
+  if (result.error > 0)
+  {
+    alert(result.message);
+  }
+}
+</script>

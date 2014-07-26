@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js,jQuery-1.7.1.js,jquery.jflip-0.4.js,excanvasX.js'}
+<script language="javascript" type="text/javascript"> 
+$(function(){
+	document.getElementById('bgimg').height=document.body.offsetHeight+20+20;
+	$("#demo1").jFlip(954,401,{background:"white",cornersTop:true,scale:"fill"});
+});
+
+</script>
+</head>
+<body>
+<div id="div_bg" style="margin-top:20px">
+<img src="images/bg.jpg"  id="bgimg" style="z-index:-1;position:absolute;left:0;top:0;width:100%;" >
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix"> 
+  <!--right start-->
+  <div class="indexR">
+   <!--焦点图和站内快讯 START-->
+       <div>
+          <ul id="demo1">
+              <li><img src="images/m1.jpg"></li>
+              <li><img src="images/m2.jpg"></li>
+              <li><img src="images/m3.jpg"></li>
+          </ul>     
+       </div>    
+   <!--焦点图和站内快讯 END-->
+  </div>
+  <!--right end-->
+</div>
+<div  class="indexbox" id="bottomNav" >
+ <div class="indexbox_1">
+    <div  class="indeximg f_l cat"  ><img src="images/index/4.jpg" usemap="#Map4" id="4"/><div class="new"><img src="images/new.png" /></div>
+     <map name="Map4" id="Map4">
+            	<area shape="rect" coords="204,265,304,302" href="category.php?id=4" />
+     </map>
+    </div>
+	<div  class="indeximg f_l indeximgl cat" ><img src="images/index/5.jpg" border="0" usemap="#Map5"  id="5"/>
+     <map name="Map5" id="Map5">
+            	<area shape="rect" coords="204,265,304,302" href="category.php?id=5" />
+     </map>
+    </div>
+    <div  class="indeximg f_l indeximgl cat" ><img src="images/index/6.jpg" usemap="#Map6" id="6"/>
+    <map name="Map6" id="Map6">
+            	<area shape="rect" coords="204,265,304,302" href="category.php?id=6" />
+     </map>
+    </div>
+	<div  class="indeximg1 f_l cat">
+    		<img src="images/index/2.jpg" width="630px" border="0" usemap="#Map2" id="2"/>
+			<div class="new2"><img src="images/new.png" /></div>
+            <map name="Map2" id="Map2">
+            	<area shape="rect" coords="511,262,631,304" href="category.php?id=2" />
+            </map>
+    </div>
+	<div  class="indeximg f_l indeximgl cat" ><img src="images/index/3.jpg" border="0" usemap="#Map3" id="3" />
+      <map name="Map3" id="Map3" >
+            	<area shape="rect" coords="204,265,304,302" href="category.php?id=3" />
+       </map>
+	</div>
+  </div>
+<div>
+<div class="blank5"></div>
+<div class="blank5"></div>
+<div class="blank5"></div>
+<div class="blank5"></div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</div>
+<script>
+$(".cat").mouseenter(function(){
+	 var id=$(this).children("img").attr("id");
+  
+    $("#"+id).attr("src","themes/default/images/index/"+id+"bg.jpg");
+	$(this).children(".new").hide();
+	$(this).children(".new2").hide();
+	
+});
+
+$(".cat").mouseleave(function (){
+	var id=$(this).children("img").attr("id");
+	$("#"+id).attr("src","themes/default/images/index/"+id+".jpg");
+    $(this).children(".new").show();
+	$(this).children(".new2").show();
+});
+</script>
+</body>
+</html>

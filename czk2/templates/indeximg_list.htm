@@ -1,0 +1,98 @@
+{include file="pageheader.htm"}
+<div class="tab-div">
+  <!-- tab bar -->
+  
+  <!-- body -->
+  <div class="tab-body">
+  <div class="list-div list-div-ad" id="listDiv">
+  <table cellspacing='1' cellpadding='3' id='list-table' width="70%">
+    <tr>
+      <th width="400px">图片链接地址</th>
+      <th>链接地址</th>
+      <th>图片说明</th>
+      <th>排序</th>
+      <th>发布时间</th>
+      <th>结束时间</th>
+    <th width="70px">操作</th>
+    </tr>
+    {foreach from=$playerdb item=item key=key}
+    <tr>
+      <td><a href="{$item.src}" target="_blank">{$item.src}</a></td>
+    <td align="left"><a href="{$item.url}" target="_blank">{$item.url}</a></td>
+      <td align="left">{$item.text}</td>
+      <td align="left">{$item.sort}</td>
+       <td align="left">{$item.sdate}</td>
+       <td align="left">{$item.edate}</td>
+    <td align="center">
+        <a href="indeximg.php?act=edit&id={$key}" title="{$lang.edit}">编辑</a>
+        <a href="indeximg.php?act=del&id={$key}" onclick="return check_del();" title="删除">删除</a>
+      </td>
+    </tr>
+    {/foreach}
+  </table>
+  <table cellspacing="0">
+    <tr>
+      <td>
+        <input name="add" type="submit" id="btnSubmit" value="添加图片" onclick="location.href='{$action_link_special.href}';" class="button"/>
+      </td>
+    </tr>
+  </table>
+  </div>
+
+  </div>
+
+</div>
+<script language="JavaScript">
+<!--
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+function check_del()
+{
+  if (confirm('是否删除'))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+/**
+ * 安装Flash样式模板
+ */
+function setupFlashTpl(tpl, obj)
+{
+    window.current_tpl_obj = obj;
+    if (confirm(setupConfirm))
+    {
+        Ajax.call('flashplay.php?is_ajax=1&act=install', 'flashtpl=' + tpl, setupFlashTplResponse, 'GET', 'JSON');
+    }
+}
+
+function setupFlashTplResponse(result)
+{
+    if (result.message.length > 0)
+    {
+        alert(result.message);
+    }
+
+    if (result.error == 0)
+    {
+        var tmp_obj = window.current_tpl_obj.parentNode.parentNode.previousSibling;
+        while (tmp_obj.nodeName.toLowerCase() != 'tr')
+        {
+            tmp_obj = tmp_obj.previousSibling;
+        }
+        tmp_obj = tmp_obj.getElementsByTagName('center');
+        tmp_obj[0].appendChild(document.getElementById('current_theme'));
+    }
+    
+}
+//-->
+</script>
+
+{include file="pagefooter.htm"}

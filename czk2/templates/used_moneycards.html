@@ -1,0 +1,65 @@
+<!-- $Id: used_moneycards.htm  2013-11-30 02:27:21Z testxufengli $ -->
+{if $full_page}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{include file="pageheader.htm"}
+<h1>管理员：{$admin_name}</h1>
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- start used_moneycard list -->
+<form action="moneycard1.php?act=used_card" method="post" name="listForm" >
+<div class="list-div" id="listDiv">
+{/if}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;起始号段：<input type="text" name="scard" id="scard" value='{$scard}' size="20">&nbsp;&nbsp;&nbsp;截止号段：<input type="text" name="ecard" id="ecard" value='{$ecard}' size="20" >&nbsp;&nbsp;&nbsp;
+      <input type="submit" value="搜索">
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>		 		
+
+      <th width="50">号段</th>
+      <th>充值时间</th>
+      <th>金额 </th>
+      <th>姓名</th>
+      <th>手机</th>
+      <th>座机</th>
+      <th>生效日期</th>
+      <th>失效日期</th>
+    </tr>
+    {foreach from=$used_list item=used}
+    <tr>
+      <td>{$used.cardid}&nbsp;</td> 
+      <td>{$used.usedtime1}&nbsp;</td>  
+      <td>{$used.cardmoney}&nbsp;</td>
+      <td>{$used.rea_name}&nbsp;</td>
+      <td>{$used.mobile_phone}&nbsp;</td>
+      <td>{$used.home_phone}&nbsp;</td>
+      <td>{$used.sdate1}&nbsp;</td>
+      <td>{$used.edate1}&nbsp;</td>     
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="7">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+{if $full_page}
+
+</div>
+</form>
+<!-- end user_bonus list -->
+<script type="text/javascript" language="JavaScript">
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+  listTable.query = "eachquery";
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    // 开始检查订单
+    startCheckOrder();
+    document.forms['listForm'].reset();
+  }
+  {/literal}
+</script>
+{include file="pagefooter.htm"}
+{/if}

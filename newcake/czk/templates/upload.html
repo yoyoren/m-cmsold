@@ -1,0 +1,60 @@
+﻿{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<form action="app_upload.php?act=addaction" method="post" enctype="multipart/form-data" id="myForm" onsubmit="return fun2()">
+<div class="main-div">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">请选择平台：</td>
+    <td>&nbsp;&nbsp;<select name="app" id="app" onclick="fun1()">
+           <option value="a" selected="selected">Android</option>
+           <option value="i">iPhone</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td class="label">请输入版本号：</td>
+    <td><b>v</b><input type="text" name="version" id="version" maxlength="5" size="5"/></td>
+  </tr>
+  <tr id="f" style="display:'';">
+    <td class="label">选择文件：</td>
+    <td>&nbsp;&nbsp;<input type="file" name="file" id="file" /></td>
+  </tr>
+  <tr align="center">
+    <td colspan="2">
+
+      <input type="submit" class="button" name="Submit" value="确定" />
+      <input type="reset" class="button"  name="Reset"  value="重置" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script type="Text/Javascript" language="JavaScript">
+  function fun1()
+  {
+    var app=document.getElementById("app").value;
+    var f=document.getElementById("f");
+    if(app=='i')
+        {     
+        f.style.display="none";
+        }
+    else if(app=='a')
+        {
+        f.style.display="";   
+        }
+  }
+   function fun2()
+  {
+	  var version=document.getElementById("version");
+	  if(!version.value)
+		  {
+		      alert("版本号不能为空！");return false;
+		  }else if(!/^[0-9.]+$/.test(version.value))
+		  {
+			  alert("版本号格式不正确！");return false;
+		  }else if(!document.getElementById("file").value&&document.getElementById("app").value=='a')
+		  {
+			  alert("未选择文件！");return false;  
+		  }
+  }
+</script>
+{include file="pagefooter.htm"}

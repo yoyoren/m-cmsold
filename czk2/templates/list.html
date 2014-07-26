@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../js/transport.js"></script>
+<script type="text/javascript">
+var  oid=0;
+var edit;
+var selected;
+var listed;
+function fun(id){
+	
+	listed=document.getElementById(id);
+	edit=document.getElementById("edit"+id);
+	selected=document.getElementById("s"+id);
+	if(edit.innerHTML=="修改")
+	{
+	    if(oid)
+		{
+			document.getElementById(oid).style.display='block';
+			document.getElementById("s"+oid).style.display='none';
+			document.getElementById("edit"+oid).innerHTML="修改";	
+		}
+		selected.style.display='block';
+		listed.style.display='none';
+	    edit.innerHTML="确定";
+		oid=id;
+	}else if(edit.innerHTML=="确定")
+	{
+		
+		 Ajax.call( 'is_on_sale.php?act=update','id='+id+'&is_listed='+selected.value , callback, 'GET', 'TEXT');
+	}
+}
+function callback($res){
+	if($res)
+	{
+	  //window.location = 'is_on_sale.php?act=list';
+	  if(selected.value=='0'){listed.innerHTML="<font style='color:red;font-weight:bold;'>未上市</font>";}else{listed.innerHTML="已上市";}
+	  listed.style.display='block';
+	  selected.style.display='none';
+		edit.innerHTML="修改";
+		oid=0;
+    }
+	else
+	{
+	   alert("修改出错");
+	}
+}
+</script>
+<body style="text-align:center;">
+<form action="is_on_sale.php?act=list" method="post">
+<table align="center">
+  <tr>
+    <td>商品:</td>
+    <td><select name="goods_id">
+	                <option value="">选择商品</option>
+                    {html_options options=$goods}
+		          </select>
+    </td>
+    <td>城市:</td>
+    <td><select name="city">
+                    <option value="">选择城市</option>
+					<option value="442" >上海</option>
+					<option value="440" >杭州</option>
+					<option value="441" >北京</option>
+					<option value="443" >天津</option>
+	    </select>
+	 </td>
+    <td>是否上市:</td>
+    <td><select name="is_listed">
+                    <option value="">全部</option>
+					<option value="a" >未上市</option>
+					<option value="b" >已上市</option>
+	    </select>
+    </td>
+    <td><input type="submit" value="搜索"/></td>
+    <td><a href="?act=sale_log">最近修改记录</a></td>
+  </tr>
+</table>
+<table width="800px" border="1" cellpadding="5" cellspacing="0"  align="center" id="table">
+  <tr>
+    <td>编号</td>
+    <td>商品名称</td>
+    <td>城市</td>
+    <td width="80px">是否上市</td>  
+    <td>操作</td>
+  </tr>
+  {foreach from=$list key=kk item=val}     
+  <tr>
+    <td>{$kk}</td>
+    <td>{$val.goods_name_style}</td>
+    <td>    
+      <table border="0" cellpadding="3" cellspacing="0"  align="center" width="100%">
+      {foreach from=$val.city key=k item=v}
+        <tr><td>{$v}</td></tr>
+        {/foreach}
+      </table>      
+    </td>
+    <td>   
+      <table border="0" cellpadding="3" cellspacing="0"  align="center" width="100%">
+       {foreach from=$val.is_listed key=k item=v}
+        <tr>
+        <td  width="70px"><span id="{$k}">{if $v=="0"}<font style="color:red;font-weight:bold;">未上市</font>{else}已上市{/if}</span>       
+        <select style="display:none" id="s{$k}">{html_options options=$sale selected=$v}</select>
+        </td></tr>
+        {/foreach}
+      </table>      
+    </td>
+    <td>
+      <table border="0" cellpadding="3" cellspacing="0"  align="center" width="100%">
+         {foreach from=$val.id key=k item=v}
+        <tr><td onclick="fun({$v})" id="edit{$v}" style="color:blue;cursor:pointer;font-weight:bold;">修改</td></tr>
+        {/foreach}
+      </table>     
+    </td>
+  </tr>
+  {/foreach}
+</table>
+</form>
+</body>
+</html>

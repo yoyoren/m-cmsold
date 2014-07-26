@@ -1,0 +1,79 @@
+<!-- $Id: eachday_count.htm  2013-11-30 02:27:21Z testxufengli $ -->
+{if $full_page}
+{include file="pageheader.htm"}
+<h1>管理员：{$admin_name}</h1>
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- start user_bonus list -->
+<div class="list-div" id="listDiv">
+{/if}
+<!--if $act='order_list'-->
+<div style="margin-top:10px;margin-bottom:10px;">
+<form action="eachday_count.php?act=order_list" method="post" name="listForm" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：<input type="text" name="date" id="date" value='{$date}' size="20">&nbsp;&nbsp;&nbsp;
+      <input type="submit" value="搜索">
+</form>
+</div>
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th width="50">订单号</th> 
+      <th>商品名称</th>
+      <th>商品磅重</th>
+      <th>商品数量</th>
+      <th>礼金卡</th>
+      <th>现金券</th>
+      <th>蛋糕折后金额</th>
+      <th>已支付款额</th>
+      <th>未支付款额</th>
+      <th>支付类型</th>
+      <th>备注</th>
+      <th>配送日期</th>
+    </tr>
+    {foreach from=$order_list item=order}
+    <tr>
+      <td>{$order.order_sn}</td>       
+      <td>{$order.goods_name}</td>
+      <td>{$order.goods_attr}</td>
+      <td>{$order.goods_number}</td>
+      <td>{$order.surplus}</td>
+      <td>{$order.bonus}</td>
+      <td>{$order.goods_amount}</td>
+      <td>{$order.money_paid}</td>
+      <td>{$order.order_amount}</td>
+      <td>{$order.pay_name}</td>
+      <td>{$order.pay_note}</td>
+      <td>{$order.best_time}</td> 
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="11">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+  <!--/if-->
+{if $full_page}
+</div>
+<!-- end user_bonus list -->
+<script type="text/javascript" language="JavaScript">
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+  listTable.query = "query";
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    // 开始检查订单
+    startCheckOrder();
+    document.forms['listForm'].reset();
+  }
+  {/literal}
+</script>
+{include file="pagefooter.htm"}
+{/if}

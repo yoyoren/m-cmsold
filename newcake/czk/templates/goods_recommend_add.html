@@ -1,0 +1,42 @@
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<form action="goods_recommend.php?act=insert" method="post" enctype="multipart/form-data" id="myForm" onsubmit="return fun()">
+<div class="main-div">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">请选择蛋糕名称：</td>
+    <td><select name="goods_id" id="goods_id">
+           <option value="" selected="selected">---请选择--- </option>
+           {html_options options=$goods}
+    </select></td>
+  </tr>
+  <tr>
+    <td class="label">请输入推荐序号：</td>
+    <td><input type="text" name="order_id" id="order_id" size="5"/></td>
+  </tr>
+  <tr align="center">
+    <td colspan="2">
+      <input type="submit" class="button" name="Submit" value="确定" />
+      <input type="reset" class="button"  name="Reset"  value="重置" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script type="Text/Javascript" language="JavaScript">
+   function fun()
+  {
+	  var goods_id=document.getElementById("goods_id").value;
+	  var order_id=document.getElementById("order_id").value;
+	  if(goods_id && order_id)
+	  {
+		  if(isNaN(order_id)){alert('请输入数字'); return false;}
+		  return true;
+	  }else{
+		  if(!goods_id){alert("请选择商品名称！");return false;}
+		  else if(!order_id){alert("请输入商品推荐序号！");return false;}
+		  
+	  }
+  }
+</script>
+{include file="pagefooter.htm"}

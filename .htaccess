@@ -1,0 +1,19 @@
+#RewriteEngine on
+#RewriteCond %{HTTP_HOST} ^(mescake.com)(:80)? [NC]
+#RewriteRule ^(.*)$ http://www.mescake.com/$1 [R=301,L]
+
+#RewriteEngine On
+#RewriteBase / RewriteCond %{HTTP_HOST} !mescake.com$ [NC]
+#RewriteRule ^(.*)$ http://www.mescake.com$1 [L,R=301]
+
+#rewriteEngine on
+#rewriteCond %{http_host} ^mescake.com [NC]
+#rewriteRule ^(.*)$ http://www.mescake.com/$1 [R=301,L]
+
+RewriteEngine on
+RewriteCond %{http_host} ^mescake.com [NC]
+RewriteRule ^(.*)$ http://www.mescake.com/$1 [L,R=301]
+
+#RewriteEngine On
+#RewriteCond %{HTTP_HOST} !mescake.com$ [NC]
+#RewriteRule ^(.*)$ http://www.mescake.com/$1 [L,R=301]

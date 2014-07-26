@@ -1,0 +1,104 @@
+<!-- $Id: eachday_count.htm  2013-11-30 02:27:21Z testxufengli $ -->
+{if $full_page}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{include file="pageheader.htm"}
+<h1>管理员：{$admin_name}</h1>
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- start user_bonus list -->
+<div class="list-div" id="listDiv">
+{/if}
+<div>
+<form action="" method="post" name="listForm" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订购日期：<input type="text" name="odate" id="odate" value='{$odate}' size="20" onfocus="clearadate()"  onclick="return showCalendar('odate', '%Y-%m-%d', false, false, 'odate');">&nbsp;&nbsp;&nbsp;配送日期：<input type="text" name="adate" id="adate" value='{$adate}' size="20" onfocus="clearodate()" onclick="return showCalendar('adate', '%Y-%m-%d', false, false, 'adate');"  >&nbsp;&nbsp;&nbsp;
+      <input type="submit" value="搜索">
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th width="50">订单号</th>
+      <th>客服工号</th>
+      <th>订货人</th>
+      <th>订货电话</th>
+      <th>收货人</th>
+      <th>收货电话</th>
+      <th>送货地址</th>
+      <th>商品名称</th>
+      <th>商品磅重</th>
+      <th>商品数量</th>
+      <th>应收金额</th>
+      <th>支付类型</th>
+      <th>支付备注</th>
+      <th>备注</th>
+      <th>订购日期</th>
+      <th>时间</th>
+      <th>配送日期</th>
+      <th>时间</th>
+    </tr>
+    {foreach from=$order_list item=order}
+    <tr>
+      <td>{$order.order_sn}</td> 
+      <td>{$order.kfgh}</td>  
+      <td>{$order.orderman}</td>
+      <td>{$order.ordertel}</td>
+      <td>{$order.consignee}</td>
+      <td>{$order.mobile}</td>
+      <td>{$order.address}</td>     
+      <td>{$order.goods_name}</td>
+      <td>{$order.goods_attr}</td>
+      <td>{$order.goods_number}</td>
+      <td>{$order.order_amount}</td>
+      <td>{$order.pay_name}</td>
+      <td>{$order.pay_note}</td>
+      <td>{$order.wsts}</td>
+      <td>{$order.confirmtime}</td> 
+      <td>{$order.confirmtime1}</td> 
+      <td>{$order.best_time2}</td> 
+      <td>{$order.best_time1}</td> 
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="17">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+{if $full_page}
+
+</form>
+</div>
+</div>
+<!-- end user_bonus list -->
+<script type="text/javascript" language="JavaScript">
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+  listTable.query = "eachquery";
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    // 开始检查订单
+    startCheckOrder();
+    document.forms['listForm'].reset();
+  }
+  {/literal}
+</script>
+<script type="text/javascript" language="JavaScript">
+{literal}
+function clearodate()
+{ 
+		document.getElementById("odate").value="";
+}
+function clearadate()
+{ 
+		document.getElementById("adate").value="";
+}
+ {/literal}
+ </script>
+{include file="pagefooter.htm"}
+{/if}
