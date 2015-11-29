@@ -106,7 +106,16 @@ elseif ($_REQUEST['act'] == 'print')
 			//exit;
 			$bdate = substr($order['best_time'],0,10);
 			$ad = substr($order['best_time'],11,5) >= '19:00' ? '晚' :'';
-		
+		    $current_order_sn = $order['order_sn'];
+			$current_order_id = $order['order_id'];
+			
+			//for scan code and change order status
+			$salt = "mescake_shipping_code";
+			$token = md5(md5($current_order_id).$current_order_sn.$salt);
+			$token = substr($token,0,6);
+			$code_url = "http://s.mescake.com/s.php?s=1&id=".$current_order_id.'&tk='.$token;
+			$order['code_url'] = $code_url;
+			
 			$smarty->assign('order',    $order);
 			$smarty->assign('pay',    $pay);
 			$smarty->assign('tips',    $bdate.$ad);
@@ -116,6 +125,7 @@ elseif ($_REQUEST['act'] == 'print')
 			$smarty->assign('psn', $psn);
 			$smarty->assign('begin_padding', $begin_padding);
 			
+			//var_dump($code_url);
 			if($begin_padding == 1.2){
 			  $begin_padding -=0.2;
 			}else{
